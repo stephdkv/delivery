@@ -131,3 +131,5 @@ dmypy.json
 .idea/
 /settings.py
 /.gitconfig
+/docker-compose.yml
+/docker/
