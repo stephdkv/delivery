@@ -49,7 +49,6 @@ class ProductCategory(Base):
     product_id = Column(ForeignKey('products.id'))
     category_id = Column(ForeignKey('categories.id'))
     extra_data = Column(String(100))
-
     category = relationship('Category', backref='product_product_category')
     product = relationship('Product', backref='category_product_category')
 
