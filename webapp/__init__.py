@@ -10,6 +10,6 @@ def create_app() -> Flask:
 
     @app.route("/")
     def index():
-        pass
+        return render_template("admin/index.html")
 
     return app
