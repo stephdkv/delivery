@@ -10,6 +10,10 @@ def create_app() -> Flask:
 
     @app.route("/")
     def index():
-        return render_template("admin/index.html")
+        return render_template(
+            "admin/base.html",
+            title="Главная",
+            menu=app.config.get('ADMIN_NAVBAR')
+        )
 
     return app
