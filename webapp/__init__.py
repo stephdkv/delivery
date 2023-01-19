@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_login import LoginManager
 from flask_migrate import Migrate
 
@@ -20,6 +20,24 @@ def create_app() -> Flask:
 
     app.register_blueprint(user_blueprint)
     app.register_blueprint(pickup_point_blueprint)
+
+    @app.route("/")
+    def index():
+        title = 'Главная'
+        return render_template('index.html', carousel_items=[
+            {
+                'position': 0,
+                'heading': 'Тест1',
+                'description': 'Тест1  text',
+            },
+            {
+                'position': 1,
+                'heading': 'Тест2',
+                'description': 'Тест2  text',
+            },
+        ])
+
+
 
     @login_manager.user_loader
     def load_user(user_id):
