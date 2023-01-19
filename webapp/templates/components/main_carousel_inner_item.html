@@ -1,0 +1,25 @@
+<div class="carousel-item
+    {% if carousel_item['position'] == 0 %}
+        active
+    {% endif %}
+    ">
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-7 col-lg-6 ">
+                <div class="detail-box">
+                    <h1>
+                        {{ carousel_item['heading'] }}
+                    </h1>
+                    <p>
+                        {{ carousel_item['description'] }}
+                    </p>
+                    <div class="btn-box">
+                        <a href="" class="btn1">
+                            Order Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
