@@ -1,0 +1,24 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<form class="row g-3" method="post">
+    <div class="container text-center">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="title">@</span>
+            <input type="text" class="form-control" placeholder="title" aria-label="title" aria-describedby="title">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="city">@</span>
+            <input type="text" class="form-control" placeholder="city" aria-label="city" aria-describedby="city">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="street">@</span>
+            <input type="text" class="form-control" placeholder="street" aria-label="street" aria-describedby="street">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="house">@</span>
+            <input type="text" class="form-control" placeholder="house" aria-label="house" aria-describedby="house">
+        </div>
+     <button type="submit" class="btn btn-primary mb-3">Confirm identity</button>
+    </div>
+</form>
+{% endblock content %}

@@ -8,7 +8,7 @@ blueprint = Blueprint('pickup_point', __name__, url_prefix='/admin/pickup_point'
 
 
 @blueprint.route('/add')
-# @admin_required
+@admin_required
 def add():
     title = 'Добавление пункта выдачи'
     return render_template('admin/pickup_point/add.html', page_title=title)

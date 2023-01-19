@@ -1,6 +1,6 @@
 from sqlalchemy.orm import relationship
 
-from webapp import db
+from webapp.models import db
 
 
 class PickupPoint(db.Model):
@@ -10,7 +10,7 @@ class PickupPoint(db.Model):
     city = db.Column(db.String)
     street = db.Column(db.String)
     house = db.Column(db.String)
-    # deliveries = relationship("Delivery")
+    deliveries = relationship("Delivery")
 
     def __repr__(self) -> str:
         return (
