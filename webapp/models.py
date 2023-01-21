@@ -3,23 +3,6 @@ from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
 
-# class Address(db.Model):
-#     __tablename__ = "addresses"
-#     id = db.Column(db.Integer, primary_key=True)
-#     city = db.Column(db.String(30))
-#     street = db.Column(db.String)
-#     house = db.Column(db.String)
-#     apartment = db.Column(db.String)
-#     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-#     deliveries = relationship("Delivery")
-#
-#     def __repr__(self) -> str:
-#         return (
-#             f"Address id: {self.id}, city: {self.city}, street: {self.street}, "
-#             f"house: {self.house}, apartment: {self.apartment}, user_id: {self.user_id}"
-#         )
-#
-#
 # class Product(db.Model):
 #     __tablename__ = "products"
 #     id = db.Column(db.Integer, primary_key=True)
@@ -107,19 +90,6 @@ db = SQLAlchemy()
 #         return f"Delivery id: {self.id}, basket_id: {self.basket_id}, user_id: {self.user_id}"
 #
 #
-# class Delivery(db.Model):
-#     __tablename__ = "deliveries"
-#     id = db.Column(db.Integer, primary_key=True)
-#     order_id = db.Column(db.Integer, db.ForeignKey("orders.id"))
-#     done = db.Column(db.Boolean)
-#     address_id = db.Column(db.Integer, db.ForeignKey("addresses.id"))
-#     pickup_point_id = db.Column(db.Integer, db.ForeignKey("pickup_point.id"))
-#
-#     def __repr__(self) -> str:
-#         return (
-#             f"Delivery id: {self.id}, order_id: {self.order_id}, done: {self.done}, "
-#             f"address_id: {self.address_id}, pickup_point_id: {self.pickup_point_id}"
-#         )
 #
 #
 # class Employer(db.Model):

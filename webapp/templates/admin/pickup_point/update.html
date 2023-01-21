@@ -5,7 +5,7 @@
         </div>
         <div class="col-6">
             <h2 class="h2 mb-5">{{ page_title }}</h2>
-            <form class="row g-3" action="{{ url_for('pickup_point.process_add') }}" method="post">
+            <form class="row g-3" action="{{ url_for('pickup_point.process_update') }}" method="post">
                 {{ form.hidden_tag() }}
                 <div class="container text-center">
                     <div class="form-group">
@@ -23,6 +23,10 @@
                     <div class="form-group">
                         {{ form.house.label }}<br>
                         {{ form.house() }}
+                    </div>
+                        <div class="form-group">
+                        {{ form.is_active.label }}<br>
+                        {{ form.is_active() }}
                     </div>
                     <br>
                     {{ form.submit }}

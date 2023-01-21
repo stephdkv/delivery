@@ -1,0 +1,38 @@
+{% extends "admin/base.html" %}
+{% block content %}
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">City</th>
+            <th scope="col">Street</th>
+            <th scope="col">House</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for point in point_list %}
+            <tr>
+                <th scope="row">{{ point.id }}</th>
+                <td>
+                    <a href="{{ url_for('pickup_point.update' ,pickup_point_id=point.id) }}" class="item_link">
+                        {{ point.title }}
+                    </a>
+                </td>
+                <td>{{ point.city }}</td>
+                <td>{{ point.street }}</td>
+                <td>{{ point.house }}</td>
+                <td>
+                    <a class="btn btn-primary"
+                       href="{{ url_for('pickup_point.process_delete' ,pickup_point_id=point.id) }}"
+                       role="button">
+                        Удалить
+                    </a>
+                </td>
+
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

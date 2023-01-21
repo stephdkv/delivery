@@ -1,0 +1,33 @@
+{% extends "admin/base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+            <h2 class="h2 mb-5">{{ page_title }}</h2>
+            <form class="row g-3" action="{{ url_for('delivery.process_add') }}" method="post">
+                {{ form.hidden_tag() }}
+                <div class="container text-center">
+                    <div class="form-floating">
+                        {{ form.order_id.label }}<br>
+                        {{ form.order_id() }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.done.label }}<br>
+                        {{ form.done() }}
+                    </div>
+                    <div class="form-floating">
+                        {{ form.address_id.label }}<br>
+                        {{ form.address_id() }}
+                    </div>
+                    <div class="form-floating">
+                        {{ form.pickup_point_id.label }}<br>
+                        {{ form.pickup_point_id() }}
+                    </div>
+                    <br>
+                    {{ form.submit }}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
