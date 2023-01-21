@@ -1,0 +1,38 @@
+{% extends "admin/base.html" %}
+{% block content %}
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">city</th>
+            <th scope="col">street</th>
+            <th scope="col">house</th>
+            <th scope="col">apartment</th>
+            <th scope="col">user_id</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for address in address_list %}
+            <tr>
+                <th scope="row">
+                    <a href="{{ url_for('address.update' ,address_id=address.id) }}" class="item_link">
+                        {{ address.id }}
+                    </a>
+                </th>
+                <td>{{ address.city }}</td>
+                <td>{{ address.street }}</td>
+                <td>{{ address.house }}</td>
+                <td>{{ address.apartment }}</td>
+                <td>{{ address.user_id }}</td>
+                <td>
+                    <a class="btn btn-primary"
+                       href="{{ url_for('address.process_delete' ,address_id=address.id) }}"
+                       role="button">
+                        Удалить
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
