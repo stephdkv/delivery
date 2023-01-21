@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, app
+from flask import Blueprint, render_template
+
+from webapp import config
 from webapp.admin.decorators import admin_required
 
 blueprint = Blueprint('admin', __name__, url_prefix='/admin')
@@ -11,5 +13,5 @@ def admin_index():
     return render_template(
         "admin/index.html",
         page_title=title,
-        menu=app.config.get('ADMIN_NAVBAR'),
+        menu=config.ADMIN_NAVBAR,
     )

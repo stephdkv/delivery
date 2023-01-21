@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template
 
+from webapp import config
 from webapp.admin.decorators import admin_required
+from webapp.admin.pickup_point.forms import PickupPointForm
 from webapp.models import db
 from webapp.admin.pickup_point.models import PickupPoint
 
@@ -11,7 +13,13 @@ blueprint = Blueprint('pickup_point', __name__, url_prefix='/admin/pickup_point'
 @admin_required
 def add():
     title = 'Добавление пункта выдачи'
-    return render_template('admin/pickup_point/add.html', page_title=title)
+    form = PickupPointForm()
+    return render_template(
+        "admin/pickup_point/add.html",
+        page_title=title,
+        form=form,
+        menu=config.ADMIN_NAVBAR,
+    )
 
 
 @blueprint.route('/process-add')
@@ -48,6 +56,13 @@ def proces_delete(pickup_point_id: int) -> None:
         db.session.delete(deleted_pickup_point)
         db.session.commit()
 
+
+@blueprint.route('/list')
+@admin_required
+def show_list():
+    title = 'Список пунктов выдачи'
+    point_list = PickupPoint.query.order_by(PickupPoint.id.asc()).all()
+    return render_template('admin/pickup_point/list.html', page_title=title, point_list=point_list)
 
 # def get(pickup_point_id: int) -> PickupPoint | None:
 #     return db.session.query(PickupPoint).filter_by(id=pickup_point_id).first()
