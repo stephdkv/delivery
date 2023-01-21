@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Доставка еды</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">Доставка еды</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Меню
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Пасты</a></li>
+              <li><a class="dropdown-item" href="#">Супы</a></li>
+              <li><a class="dropdown-item" href="#">Салаты</a></li>
+              <li><a class="dropdown-item" href="#">Десерты</a></li>
+              <li><a class="dropdown-item" href="#">Напитки</a></li>
+              <li><a class="dropdown-item" href="#">Стейки</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Акции</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Условия доставки</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Контакты</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">О нас</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Заказать доставку</a>
+            
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Корзина</a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container text-center fs-1">
+    Оформление заказа
+  </div>
+  <div class="container">
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+          Вынос
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+        <label class="form-check-label" for="flexRadioDefault2">
+          Доставка
+        </label>
+    </div>
+      <div class="row g-5">
+        <div class="col-md-5 col-lg-4 order-md-last">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Ваш заказ</span>
+            <span class="badge bg-primary rounded-pill">3</span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0">Имя продукта</h6>
+                <small class="text-muted">Описание</small>
+              </div>
+              <span class="text-muted">12&#8381;</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0">Имя продукта</h6>
+                <small class="text-muted">Описание</small>
+              </div>
+              <span class="text-muted">8&#8381;</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0">Имя продукта</h6>
+                <small class="text-muted">Описание</small>
+              </div>
+              <span class="text-muted">5&#8381;</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0">Promo code</h6>
+                <small>EXAMPLECODE</small>
+              </div>
+              <span class="text-success">−5&#8381;</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Итого (руб.)</span>
+              <strong>20&#8381;</strong>
+            </li>
+          </ul>
+  
+          <form class="card p-2">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Промокод">
+              <button type="submit" class="btn btn-secondary">Применить</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-7 col-lg-8">
+          <form class="needs-validation" novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label for="firstName" class="form-label">Имя</label>
+                <input type="text" class="form-control" id="firstName" placeholder="Введите свое имя" value="" required>
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="address" class="form-label">Адрес</label>
+                <input type="text" class="form-control" id="address" placeholder="Номер дома и название улицы" required>
+                <div class="invalid-feedback">
+                  Please enter your shipping address.
+                </div>
+              </div>
+  
+              <div class="col-md-5">
+                <input type="text" class="form-control" id="zip" placeholder="Подъезд" required>
+              </div>
+              
+              <div class="col-md-4">
+                <input type="text" class="form-control" id="zip" placeholder="Этаж" required>
+              </div>
+
+              <div class="col-md-3">
+                <input type="text" class="form-control" id="zip" placeholder="Квартира" required>
+              </div>
+                
+                <div class="invalid-feedback">
+                  Пожалуйста введите свой адресс
+                </div>
+                
+
+
+              <div class="col-8">
+                <label for="firstName" class="form-label">Телефон</label>
+                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                  Пожалуйста введите свой номер телефона
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <label for="country" class="form-label">Дата</label>
+                <select class="form-select" id="country" required>
+                  <option value="">Сегодня...</option>
+                  <option></option>
+                </select>
+              </div>
+  
+              <div class="col-md-5">
+                <label for="state" class="form-label">Время</label>
+                <select class="form-select" id="state" required>
+                  <option value="">Ближайшее время...</option>
+                  <option>13:00</option>
+                  <option>13:30</option>
+                  <option>14:00</option>
+                  <option>14:30</option>
+                  <option>15:00</option>
+                  <option>15:30</option>
+                  <option>16:00</option>
+                  <option>16:30</option>
+                  <option>17:00</option>
+                  <option>17:30</option>
+                  <option>18:00</option>
+                  <option>18:30</option>
+                  <option>19:00</option>
+                  <option>19:30</option>
+                  <option>20:00</option>
+                  <option>20:30</option>
+                  <option>21:00</option>
+                  <option>21:30</option>
+                  <option>22:00</option>
+                </select>
+              </div>
+
+              <div class="col-20">
+                <label for="firstName" class="form-label">Комметарий</label>
+                <input type="text" class="form-control" id="firstName" placeholder="Примечания к вашему заказу, например, особые пожелания по доставки" required>
+
+              </div>
+
+  
+            <hr class="my-4">
+  
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="save-info">
+              <label class="form-check-label" for="save-info">Сохранить настройки ввода</label>
+            </div>
+  
+            <hr class="my-4">
+  
+            <h4 class="mb-3">Оплата</h4>
+  
+            <div class="my-3">
+              <div class="form-check">
+                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                <label class="form-check-label" for="credit">Оплата картой курьеру</label>
+              </div>
+              <div class="form-check">
+                <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                <label class="form-check-label" for="debit">Наличные</label>
+              </div>
+              <div class="form-check">
+                <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+                <label class="form-check-label" for="paypal">Оплата картой на сайте</label>
+              </div>
+            </div>
+  
+            <div class="row gy-3">
+              <div class="col-md-6">
+                <label for="cc-name" class="form-label">Имя</label>
+                <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                <small class="text-muted">Полное имя как на карте</small>
+                <div class="invalid-feedback">
+                  Name on card is required
+                </div>
+              </div>
+  
+              <div class="col-md-6">
+                <label for="cc-number" class="form-label">Номер карты</label>
+                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                <div class="invalid-feedback">
+                  Credit card number is required
+                </div>
+              </div>
+  
+              <div class="col-md-3">
+                <label for="cc-expiration" class="form-label">Дата</label>
+                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                <div class="invalid-feedback">
+                  Expiration date required
+                </div>
+              </div>
+  
+              <div class="col-md-3">
+                <label for="cc-cvv" class="form-label">CVV</label>
+                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                <div class="invalid-feedback">
+                  Security code required
+                </div>
+              </div>
+            </div>
+  
+            <hr class="my-4">
+  
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Подтвердить заказ</button>
+          </form>
+        </div>
+      </div>
+  </div>
+<body>
+</html>
