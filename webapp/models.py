@@ -3,23 +3,6 @@ from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
 
-# class Address(db.Model):
-#     __tablename__ = "addresses"
-#     id = db.Column(db.Integer, primary_key=True)
-#     city = db.Column(db.String(30))
-#     street = db.Column(db.String)
-#     house = db.Column(db.String)
-#     apartment = db.Column(db.String)
-#     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-#     deliveries = relationship("Delivery")
-#
-#     def __repr__(self) -> str:
-#         return (
-#             f"Address id: {self.id}, city: {self.city}, street: {self.street}, "
-#             f"house: {self.house}, apartment: {self.apartment}, user_id: {self.user_id}"
-#         )
-#
-#
 # class Product(db.Model):
 #     __tablename__ = "products"
 #     id = db.Column(db.Integer, primary_key=True)

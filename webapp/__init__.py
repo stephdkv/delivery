@@ -5,6 +5,8 @@ from flask_migrate import Migrate
 from webapp.user.models import User
 from webapp.models import db
 from webapp.user.views import blueprint as user_blueprint
+from webapp.admin.address.views import blueprint as address_blueprint
+from webapp.admin.delivery.views import blueprint as delivery_b_blueprint
 from webapp.admin.pickup_point.views import blueprint as pickup_point_blueprint
 
 
@@ -20,6 +22,8 @@ def create_app() -> Flask:
 
     app.register_blueprint(user_blueprint)
     app.register_blueprint(pickup_point_blueprint)
+    app.register_blueprint(delivery_b_blueprint)
+    app.register_blueprint(address_blueprint)
 
     @app.route("/")
     def index():

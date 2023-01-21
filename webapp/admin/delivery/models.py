@@ -11,9 +11,9 @@ class Delivery(db.Model):
     address_id = db.Column(db.Integer, db.ForeignKey("addresses.id"))
     pickup_point_id = db.Column(db.Integer, db.ForeignKey("pickup_point.id"))
     is_active = db.Column(db.Boolean)
-    orders = relationship("Order")
-    pickup_points = relationship("PickupPoint")
-    addresses = relationship("Address")
+    orders = relationship("Order", lazy="joined")
+    pickup_points = relationship("PickupPoint", lazy="joined", primaryjoin="PickupPoint.id == Delivery.pickup_point_id")
+    addresses = relationship("Address", lazy="joined")
 
     def __repr__(self) -> str:
         return (

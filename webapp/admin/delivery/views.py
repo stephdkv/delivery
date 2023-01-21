@@ -9,7 +9,7 @@ from webapp.admin.pickup_point.models import PickupPoint
 from webapp.models import db
 from webapp.admin.delivery.models import Delivery
 
-blueprint = Blueprint('delivery', __name__, url_prefix='/admin/delivery')
+blueprint = Blueprint('delivery_b', __name__, url_prefix='/admin/delivery')
 
 
 @blueprint.route('/add')
