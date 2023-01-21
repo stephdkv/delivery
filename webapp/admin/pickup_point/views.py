@@ -65,7 +65,7 @@ def update(pickup_point_id: int) -> str:
 
 @blueprint.route('/process-update')
 @admin_required
-def proces_update(pickup_point_id: int) -> Response:
+def process_update(pickup_point_id: int) -> Response:
     form = PickupPointUpdateForm()
     edited_pickup_point = db.session.query(PickupPoint).filter_by(id=pickup_point_id).first()
     if edited_pickup_point is not None:
@@ -81,7 +81,7 @@ def proces_update(pickup_point_id: int) -> Response:
 
 @blueprint.route('/process-delete/<int:pickup_point_id>')
 @admin_required
-def proces_delete(pickup_point_id: int) -> Response:
+def process_delete(pickup_point_id: int) -> Response:
     deleted_pickup_point = db.session.query(PickupPoint).filter_by(id=pickup_point_id).first()
     deleted_pickup_point.is_active = False
     if deleted_pickup_point is not None:

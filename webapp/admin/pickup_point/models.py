@@ -11,7 +11,7 @@ class PickupPoint(db.Model):
     street = db.Column(db.String)
     house = db.Column(db.String)
     is_active = db.Column(db.Boolean)
-    # deliveries = relationship("Delivery")
+    deliveries = relationship("Delivery")
 
     def __repr__(self) -> str:
         return (
