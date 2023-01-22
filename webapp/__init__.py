@@ -2,6 +2,12 @@ from flask import Flask, render_template
 from flask_login import LoginManager
 from flask_migrate import Migrate
 
+
+from webapp.forms import OrderingAddForm
+from webapp.models import OrderingForm
+from flask import flash
+
+
 from webapp.user.models import User
 from webapp.models import db
 from webapp.user.views import blueprint as user_blueprint
@@ -24,6 +30,42 @@ def create_app() -> Flask:
     app.register_blueprint(pickup_point_blueprint)
     app.register_blueprint(delivery_b_blueprint)
     app.register_blueprint(address_blueprint)
+
+    @app.route('/', methods=['POST'])
+    def process_ordering():
+        form = OrderingAddForm()
+        if form.validate_on_submit():
+            new_ordering_form = OrderingForm(
+                name=form.name.data,
+                adress=form.adress.data,
+                entrance=form.entrance.data,
+                floor=form.floor.data,
+                apartment=form.apartment.data,
+                phone=form.phone.data,
+                date=form.phone.data,
+                time=form.time.data,
+                comment=form.comment.data
+            )
+            db.session.add(new_ordering_form)
+            db.session.commit()
+            flash('Вы успешно сделали заказ!')
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    flash('Ошибка в поле {}: {}'.format(
+                        getattr(form, field).label.text,
+                        error
+                    ))
+        
+
+
+
+
+
+
+
+        return render_template('/home_page')
+
 
     @app.route("/")
     def index():

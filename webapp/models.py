@@ -3,6 +3,21 @@ from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
 
+class OrderingForm():
+    __tablename__ = "ordering_forms"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    adress = db.Column(db.String)
+    entrance = db.Column(db.Integer)
+    floor = db.Column(db.Integer)
+    apartment = db.Column(db.Integer)
+    phone = db.Column(db.String)
+    date = db.Column(db.Date)
+    time = db.Column(db.Datetime)
+    comment = db.Column(db.Text)
+    
+
+
 # class Product(db.Model):
 #     __tablename__ = "products"
 #     id = db.Column(db.Integer, primary_key=True)
