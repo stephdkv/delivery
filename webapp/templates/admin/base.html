@@ -1,0 +1,14 @@
+{% include "admin/_head.html" %}
+<body>
+<h1>{% block title %}{{ title }}{% endblock title %}</h1>
+
+{% include "admin/_navbar.html" %}
+<div class="container text-center mt-5">
+{% block content %}
+    <h2 class="m-2">Продажи</h2>
+        <div class="chart-container">
+        <div id="curve_chart" style="width: 900px; height: 500px"></div>
+    </div>
+{% endblock content %}
+</div>
+{% include "admin/_footer.html" %}
