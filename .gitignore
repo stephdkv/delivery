@@ -129,6 +129,7 @@ dmypy.json
 .pyre/
 
 .idea/
+settings.py
 /webapp/config.py
 /.gitconfig
 /docker-compose.yml

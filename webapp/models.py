@@ -26,3 +26,18 @@ class MainSliderAction(db.Model):
     def __repr__(self) -> str:
         return f"Review id: {self.id}, position: {self.position}, " \
                f"heading: {self.heading}, description: {self.description}"
+
+
+class OrderingForm():
+    __tablename__ = "ordering_forms"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    adress = db.Column(db.String)
+    entrance = db.Column(db.Integer)
+    floor = db.Column(db.Integer)
+    apartment = db.Column(db.Integer)
+    phone = db.Column(db.String)
+    date = db.Column(db.Date)
+    time = db.Column(db.DateTime)
+    comment = db.Column(db.Text)
+
