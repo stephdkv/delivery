@@ -17,7 +17,7 @@ class Product(db.Model):
         return (
             f"Product id: {self.id}, title: {self.title}, price: {self.price}, "
             f"description: {self.description}, calories: {self.calories}"
-        )
+         )
 
 
 class ProductCategory(db.Model):

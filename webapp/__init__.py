@@ -121,4 +121,8 @@ def create_app() -> Flask:
     def load_user(user_id):
         return User.query.get(user_id)
 
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(user_id)
+
     return app
