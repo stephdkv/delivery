@@ -31,7 +31,7 @@ def create_app() -> Flask:
     app.register_blueprint(delivery_b_blueprint)
     app.register_blueprint(address_blueprint)
 
-    @app.route('/', methods=['POST'])
+    @app.route('/ordering', methods=['POST', 'GET'])
     def process_ordering():
         form = OrderingAddForm()
         if form.validate_on_submit():
@@ -56,15 +56,7 @@ def create_app() -> Flask:
                         getattr(form, field).label.text,
                         error
                     ))
-        
-
-
-
-
-
-
-
-        return render_template('/home_page')
+        return render_template('ordering.html')
 
 
     @app.route("/")
