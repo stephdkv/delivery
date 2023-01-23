@@ -13,7 +13,7 @@ class OrderingForm():
     apartment = db.Column(db.Integer)
     phone = db.Column(db.String)
     date = db.Column(db.Date)
-    time = db.Column(db.Datetime)
+    time = db.Column(db.DateTime)
     comment = db.Column(db.Text)
     
 

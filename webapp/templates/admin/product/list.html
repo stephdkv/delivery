@@ -1,0 +1,41 @@
+{% extends "admin/base.html" %} {% block content %}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Price</th>
+      <th scope="col">Description</th>
+      <th scope="col">Calories</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in product_list %}
+    <tr>
+      <th scope="row">{{ product.id }}</th>
+      <td>
+        <a
+          href="{{ url_for('product.update' ,product_id=product.id) }}"
+          class="item_link"
+        >
+          {{ product.title }}
+        </a>
+      </td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.description }}</td>
+      <td>{{ product.calories }}</td>
+      <td>
+        <a
+          class="btn btn-primary"
+          href="{{ url_for('product.process_delete' ,product_id=product.id) }}"
+          role="button"
+        >
+          Удалить
+        </a>
+      </td>
+    </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}
