@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
     role = db.Column(db.String(255), default='user')
     t_id = db.Column(db.String(255), nullable=True)
     # addresses = relationship("Address")
-    # orders = relationship("Order")
+    # order = relationship("Order")
     # baskets = relationship("Basket")
 
     def set_password(self, password):
