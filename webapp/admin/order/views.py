@@ -3,7 +3,7 @@ from flask_login import current_user
 
 from werkzeug import Response
 
-from webapp import config, User
+from webapp import config, User, Product
 from webapp.admin.decorators import admin_required
 from webapp.admin.order.forms import OrderAddForm, OrderUpdateForm
 from webapp.models import db
@@ -17,6 +17,8 @@ blueprint = Blueprint('order', __name__, url_prefix='/admin/order')
 def add() -> str:
     title = 'Добавление заказа'
     form = OrderAddForm()
+    form.user_id.choices = [(user.id, user.username) for user in User.query.all()]
+    form.products.choices = [(product.id, product.title) for product in Product.query.filter_by(is_active=True).all()]
     return render_template(
         "admin/order/add.html",
         page_title=title,
@@ -29,17 +31,14 @@ def add() -> str:
 @admin_required
 def process_add() -> Response:
     form = OrderAddForm()
-    print(form.products)
-    # db_products = Product
-    # total = 0
-    # for product in form.products:
-    #
-    #
-    # new_basket = Basket(
-    #     user_id=form.user_id.data,
-    #     is_ordered=True,
-    #     is_active=True,
-    # )
+    products = Product.query.filter(Product.id.in_(form.products.data)).all()
+    total = sum([product.price for product in products])
+    print(total)
+    new_basket = Basket(
+        user_id=form.user_id.data,
+        is_ordered=True,
+        is_active=True,
+    )
     #
     # new_order = Order(
     #     city=form.city.data,
