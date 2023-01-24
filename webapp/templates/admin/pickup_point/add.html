@@ -1,33 +1,42 @@
-{% extends "admin/base.html" %}
-{% block content %}
-    <div class="row">
-        <div class="col-3">
+{% extends "admin/base.html" %} {% block content %}
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <h2 class="h2 mb-5">{{ page_title }}</h2>
+    <form
+      class="row g-3"
+      action="{{ url_for('pickup_point.process_add') }}"
+      method="post"
+    >
+      {{ form.hidden_tag() }}
+      <div class="container text-center">
+        <div class="form-group">
+          {{ form.title.label }}<br />
+          {{ form.title() }}
         </div>
-        <div class="col-6">
-            <h2 class="h2 mb-5">{{ page_title }}</h2>
-            <form class="row g-3" action="{{ url_for('pickup_point.process_add') }}" method="post">
-                {{ form.hidden_tag() }}
-                <div class="container text-center">
-                    <div class="form-group">
-                        {{ form.title.label }}<br>
-                        {{ form.title() }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.city.label }}<br>
-                        {{ form.city() }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.street.label }}<br>
-                        {{ form.street() }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.house.label }}<br>
-                        {{ form.house() }}
-                    </div>
-                    <br>
-                    {{ form.submit }}
-                </div>
-            </form>
+        <div class="form-group">
+          {{ form.city.label }}<br />
+          {{ form.city() }}
         </div>
-    </div>
+        <div class="form-group">
+          {{ form.street.label }}<br />
+          {{ form.street() }}
+        </div>
+        <div class="form-group">
+          {{ form.house.label }}<br />
+          {{ form.house() }}
+        </div>
+        <br />
+        {{ form.submit }}
+        <a
+          class="btn btn-primary"
+          href="{{ url_for('pickup_point.show_list') }}"
+          role="button"
+        >
+          Отменить
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
 {% endblock content %}

@@ -1,32 +1,37 @@
-{% extends "admin/base.html" %}
-{% block content %}
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">user_id</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for order in order_list %}
-            <tr>
-                <th scope="row">
-                    <a href="{{ url_for('order.update' ,order_id=order.id) }}" class="item_link">
-                        {{ order.id }}
-                    </a>
-                </th>
-                <th scope="row">
-                        {{ order.user_id }}
-                </th>
-                <td>
-                    <a class="btn btn-primary"
-                       href="{{ url_for('order.process_delete' ,order_id=order.id) }}"
-                       role="button">
-                        Удалить
-                    </a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% extends "admin/base.html" %} {% block content %}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">user_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in order_list %}
+    <tr>
+      <th scope="row">
+        <a
+          href="{{ url_for('order.update' ,order_id=order.id) }}"
+          class="item_link"
+        >
+          {{ order.id }}
+        </a>
+      </th>
+      <th scope="row">{{ order.user_id }}</th>
+      <td>
+        <a
+          class="btn btn-primary"
+          href="{{ url_for('order.process_delete' ,order_id=order.id) }}"
+          role="button"
+        >
+          Удалить
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a class="btn btn-primary" href="{{ url_for('order.add') }}" role="button">
+  Добавить заказ
+</a>
 {% endblock content %}

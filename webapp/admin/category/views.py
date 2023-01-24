@@ -28,6 +28,7 @@ def process_add() -> Response:
     form = CategoryAddForm()
     new_category = Category(
         title=form.title.data,
+        translit=db.Column(db.String),
         is_active=True,
     )
     db.session.add(new_category)
@@ -76,7 +77,7 @@ def process_delete(category_id: int) -> Response:
     if deleted_category is not None:
         db.session.add(deleted_category)
         db.session.commit()
-    return redirect(url_for('pickup_point.show_list'))
+    return redirect(url_for('category.show_list'))
 
 
 @blueprint.route('/list')

@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, abort, redirect, url_for
 
 from werkzeug import Response
 
-from webapp import config
+from webapp import config, Category
 from webapp.admin.decorators import admin_required
 from webapp.admin.product.forms import ProductAddForm, ProductUpdateForm
 from webapp.models import db
@@ -15,6 +15,7 @@ blueprint = Blueprint('product', __name__, url_prefix='/admin/product')
 def add() -> str:
     title = 'Добавление товаров'
     form = ProductAddForm()
+    form.categories.choices = [(categories.id, categories.title) for categories in Category.query.filter_by(is_active=True).all()]
     return render_template(
         "admin/product/add.html",
         page_title=title,
@@ -32,6 +33,7 @@ def process_add() -> Response:
         description=form.description.data,
         calories=form.calories.data,
         is_active=True,
+        categories=form.categories.data,
     )
     db.session.add(new_product)
     db.session.commit()

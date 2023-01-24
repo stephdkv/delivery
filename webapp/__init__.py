@@ -75,6 +75,7 @@ def create_app() -> Flask:
         categories = Category.query.filter_by(is_active=True).order_by(Category.id.asc()).all()
         products = Product.query.filter_by(is_active=True).order_by(Product.id.asc()).all()
         product_list = get_product_list_with_category(products, categories)
+        print(product_list)
         return render_template(
             'index.html',
             carousel_items=carousel_items,
