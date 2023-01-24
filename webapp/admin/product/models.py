@@ -10,8 +10,6 @@ class Product(db.Model):
     price = db.Column(db.Integer)
     description = db.Column(db.Text)
     calories = db.Column(db.String)
-    is_active = db.Column(db.Boolean)
-    categories = relationship("Category", secondary="product_categories", backref='products')
 
     def __repr__(self) -> str:
         return (
