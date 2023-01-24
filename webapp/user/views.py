@@ -59,10 +59,10 @@ def process_reg():
     form = RegistrationForm()
     if form.validate_on_submit():
         news_user = User(
-            first_name=form.first_name.data,
-            last_name=form.last_name.data,
+            #first_name=form.first_name.data,
+            #last_name=form.last_name.data,
             username=form.username.data,
-            birthday=form.birthday.data,
+            #birthday=form.birthday.data,
             phone=form.phone.data,
             email=form.email.data,
             register_day=datetime.now().date(),

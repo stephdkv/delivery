@@ -26,8 +26,19 @@
           {{ form.calories.label }}<br />
           {{ form.calories() }}
         </div>
+        <div class="form-floating">
+          {{ form.categories.label }}<br />
+          {{ form.categories() }}
+        </div>
         <br />
         {{ form.submit }}
+        <a
+          class="btn btn-primary"
+          href="{{ url_for('product.show_list') }}"
+          role="button"
+        >
+          Отменить
+        </a>
       </div>
     </form>
   </div>

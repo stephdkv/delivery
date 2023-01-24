@@ -13,9 +13,9 @@ class LoginForm(FlaskForm):
 
 
 class RegistrationForm(FlaskForm):
-    first_name = StringField('Имя', validators=[DataRequired()], render_kw={"class": "form-control"})
-    last_name = StringField('Фамилия', validators=[DataRequired()], render_kw={"class": "form-control"})
-    birthday = DateField('Дата рождения', validators=[DataRequired()], render_kw={"class": "form-control"})
+    #first_name = StringField('Имя', validators=[DataRequired()], render_kw={"class": "form-control"})
+    #last_name = StringField('Фамилия', validators=[DataRequired()], render_kw={"class": "form-control"})
+    #birthday = DateField('Дата рождения', validators=[DataRequired()], render_kw={"class": "form-control"})
     phone = TelField(
         'Телефон',
         validators=[DataRequired(), Regexp(r"((8|\+7|7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}")],

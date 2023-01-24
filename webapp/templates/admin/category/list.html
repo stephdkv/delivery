@@ -17,6 +17,8 @@
         >
           {{ category.title }}
         </a>
+      </td>
+      <td>
         <a
           class="btn btn-primary"
           href="{{ url_for('category.process_delete' , category_id=category.id) }}"
@@ -30,4 +32,7 @@
     {% endfor %}
   </tbody>
 </table>
+<a class="btn btn-primary" href="{{ url_for('category.add') }}" role="button">
+  Добавить категорию
+</a>
 {% endblock content %}

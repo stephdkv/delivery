@@ -28,6 +28,7 @@ def process_add() -> Response:
     form = CategoryAddForm()
     new_category = Category(
         title=form.title.data,
+        translit = db.Column(db.String),
         is_active=True,
     )
     db.session.add(new_category)
@@ -40,13 +41,13 @@ def update(category_id: int) -> str:
     title = 'Изменение адреса'
     category = Category.query.filter(Category.id == category_id).first()
     form = CategoryUpdateForm(
-        title=category.city,
+        title=category.title,
         is_active=category.is_active,
     )
     if not category:
         abort(404)
     return render_template(
-        "admin/pickup_point/update.html",
+        "admin/category/update.html",
         page_title=title,
         form=form,
         menu=config.ADMIN_NAVBAR,
@@ -74,7 +75,7 @@ def process_delete(category_id: int) -> Response:
     if deleted_category is not None:
         db.session.add(deleted_category)
         db.session.commit()
-    return redirect(url_for('pickup_point.show_list'))
+    return redirect(url_for('category.show_list'))
 
 
 @blueprint.route('/list')

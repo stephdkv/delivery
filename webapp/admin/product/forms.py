@@ -1,11 +1,16 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, BooleanField, TextAreaField
+from wtforms import StringField, SubmitField, IntegerField, BooleanField, TextAreaField, SelectMultipleField
 from wtforms.validators import DataRequired
 
 class ProductAddForm(FlaskForm):
     title = StringField('Название', validators=[DataRequired()], render_kw={"class": "form-control"})
     price = IntegerField('Цена', validators=[DataRequired()], render_kw={"class": "form-control"})
     description = TextAreaField('Описание', validators=[DataRequired()], render_kw={"class": "form-control"})
+    categories =  SelectMultipleField(
+        u'Категории',
+        coerce=int,
+        render_kw={"class": "form-select", "multiple": True}
+    )
     calories = IntegerField('Колличество каллорий', validators=[DataRequired()], render_kw={"class": "form-control"})
     submit = SubmitField('Отправить!', render_kw={"class": "btn btn-primary"})
 

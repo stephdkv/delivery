@@ -3,13 +3,15 @@ from flask import Blueprint, render_template, abort, redirect, url_for
 from werkzeug import Response
 
 from webapp import config
+from webapp.admin.order.models import Order 
+from webapp.admin.address.models import Address
 from webapp.admin.decorators import admin_required
 from webapp.admin.delivery.forms import DeliveryAddForm, DeliveryUpdateForm
 from webapp.admin.pickup_point.models import PickupPoint
 from webapp.models import db
 from webapp.admin.delivery.models import Delivery
 
-blueprint = Blueprint('delivery_b', __name__, url_prefix='/admin/delivery')
+blueprint = Blueprint('delivery', __name__, url_prefix='/admin/delivery')
 
 
 @blueprint.route('/add')
