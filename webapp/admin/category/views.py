@@ -40,13 +40,15 @@ def update(category_id: int) -> str:
     title = 'Изменение адреса'
     category = Category.query.filter(Category.id == category_id).first()
     form = CategoryUpdateForm(
-        title=category.city,
+        id=category.id,
+        title=category.title,
         is_active=category.is_active,
+        translit=category.translit,
     )
     if not category:
         abort(404)
     return render_template(
-        "admin/pickup_point/update.html",
+        "admin/category/update.html",
         page_title=title,
         form=form,
         menu=config.ADMIN_NAVBAR,
