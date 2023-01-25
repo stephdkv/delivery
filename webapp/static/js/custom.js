@@ -68,3 +68,26 @@ $(".client_owl-carousel").owlCarousel({
         }
     }
 });
+
+$(".add-product-in-basket").click(function (e) {
+    e.preventDefault();
+    let product_id = $(this).attr('data-product-id')
+    $.ajax({
+        url: '/admin/product/process-add-from-main',
+        type: "POST",
+        contentType: "application/json",
+        dataType: 'json',
+        accept: '*/*',
+        data: JSON.stringify({
+                product_id: product_id,
+                user_id: user_id
+            },
+            null,
+            '\t'
+        ),
+        success: function(data){
+            $('.count_product_types').text(data['count_products_types'])
+        }
+    });
+})
+

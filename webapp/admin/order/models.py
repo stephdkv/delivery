@@ -1,5 +1,6 @@
 from sqlalchemy.orm import relationship
 
+from webapp import Product
 from webapp.models import db
 
 

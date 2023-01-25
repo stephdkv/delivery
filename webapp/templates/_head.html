@@ -29,5 +29,7 @@
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet"/>
     <!-- responsive style -->
     <link href="{{ url_for('static', filename='css/responsive.css') }}" rel="stylesheet"/>
-
+    <script type="text/javascript">
+        const user_id = "{{ current_user.id }}";
+    </script>
 </head>
