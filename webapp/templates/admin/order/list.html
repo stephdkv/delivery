@@ -3,6 +3,7 @@
   <thead>
     <tr>
       <th scope="col">Id</th>
+      <th scope="col">comment</th>
       <th scope="col">user_id</th>
     </tr>
   </thead>
@@ -16,6 +17,9 @@
         >
           {{ order.id }}
         </a>
+      </th>
+      <th scope="row">
+          {{ order.comment }}
       </th>
       <th scope="row">{{ order.user_id }}</th>
       <td>

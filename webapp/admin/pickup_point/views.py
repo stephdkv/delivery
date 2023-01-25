@@ -63,7 +63,7 @@ def update(pickup_point_id: int) -> str:
     )
 
 
-@blueprint.route('/process-update')
+@blueprint.route('/process-update', methods=['POST'])
 @admin_required
 def process_update(pickup_point_id: int) -> Response:
     form = PickupPointUpdateForm()

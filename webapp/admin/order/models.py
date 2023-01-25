@@ -9,12 +9,15 @@ class Order(db.Model):
     basket_id = db.Column(db.Integer, db.ForeignKey("baskets.id"))
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     is_active = db.Column(db.Boolean)
+    date_time = db.Column(db.DateTime)
+    comment = db.Column(db.Text)
     deliveries = relationship("Delivery")
     baskets = relationship("Basket")
     users = relationship("User")
 
     def __repr__(self) -> str:
-        return f"Order id: {self.id}, basket_id: {self.basket_id}, user_id: {self.user_id}"
+        return f"Order id: {self.id}, basket_id: {self.basket_id}, user_id: {self.user_id}," \
+               f"date_time:{self.date_time}, comment:{self.comment}"
 
 
 class Basket(db.Model):
@@ -30,7 +33,7 @@ class Basket(db.Model):
     def __repr__(self) -> str:
         return (
             f"Basket id: {self.id}, user_id: {self.user_id}, is_ordered: {self.is_ordered}, "
-            f"total: {self.total}"
+            f"total: {self.total}, quantity: {self.is_active}"
         )
 
 
@@ -43,12 +46,10 @@ class BasketProduct(db.Model):
     base_price = db.Column(db.Float)
     final_price = db.Column(db.Float)
     is_active = db.Column(db.Boolean)
-    # baskets = relationship("Basket")
-    # products = relationship("Product", lazy="joined", primaryjoin="Product.id == BasketProduct.product_id")
 
     def __repr__(self) -> str:
         return (
             f"BasketProduct id: {self.id}, basket_id: {self.basket_id}, product_id: {self.product_id}, "
             f"quantity: {self.quantity}, base_price: {self.base_price}, final_price: {self.final_price}, "
-            f"extra_data: {self.extra_data}"
+            f"quantity: {self.is_active}"
         )

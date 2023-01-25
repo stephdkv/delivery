@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import Blueprint, render_template, abort, redirect, url_for
 from flask_login import current_user
 
@@ -7,7 +9,7 @@ from webapp import config, User, Product
 from webapp.admin.decorators import admin_required
 from webapp.admin.order.forms import OrderAddForm, OrderUpdateForm
 from webapp.models import db
-from webapp.admin.order.models import Order, Basket
+from webapp.admin.order.models import Order, Basket, BasketProduct
 
 blueprint = Blueprint('order', __name__, url_prefix='/admin/order')
 
@@ -33,22 +35,32 @@ def process_add() -> Response:
     form = OrderAddForm()
     products = Product.query.filter(Product.id.in_(form.products.data)).all()
     total = sum([product.price for product in products])
-    print(total)
     new_basket = Basket(
         user_id=form.user_id.data,
         is_ordered=True,
+        total=total,
         is_active=True,
     )
-    #
-    # new_order = Order(
-    #     city=form.city.data,
-    #     street=form.street.data,
-    #     house=form.house.data,
-    #     apartment=form.apartment.data,
-    #     user_id=current_user.id,
-    #     is_active=True,
-    # )
-    # db.session.add(new_order)
+    db.session.add(new_basket)
+    db.session.commit()
+    new_order = Order(
+        basket_id=new_basket.id,
+        user_id=form.user_id.data,
+        date_time=datetime.now(),
+        comment=form.comment.data,
+        is_active=True,
+    )
+    db.session.add(new_order)
+    for product in products:
+        new_basket_product = BasketProduct(
+            basket_id=new_basket.id,
+            product_id=product.id,
+            quantity=1,
+            base_price=product.price,
+            final_price=product.price,
+            is_active=True,
+        )
+        db.session.add(new_basket_product)
     db.session.commit()
     return redirect(url_for('order.show_list'))
 
@@ -58,15 +70,18 @@ def process_add() -> Response:
 def update(order_id: int) -> str:
     title = 'Изменение заказа'
     order = Order.query.filter(Order.id == order_id).first()
+    basket_products = BasketProduct.query.filter_by(basket_id=order.basket_id).all()
     form = OrderUpdateForm(
-        city=order.city,
-        street=order.street,
-        house=order.house,
-        apartment=order.apartment,
+        id=order.id,
+        basket_id=order.basket_id,
         user_id=order.user_id,
         is_active=order.is_active,
+        date_time=order.date_time,
+        comment=order.comment,
+        products=[basket_product.product_id for basket_product in basket_products]
     )
-    form.user_id.choices = [(user.id, user.name) for user in User.query.order_by('id')]
+    form.user_id.choices = [(user.id, user.username) for user in User.query.order_by('id')]
+    form.products.choices = [(product.id, product.title) for product in Product.query.filter_by(is_active=True).all()]
     if not order:
         abort(404)
     return render_template(
@@ -78,18 +93,17 @@ def update(order_id: int) -> str:
     )
 
 
-@blueprint.route('/process-update')
+# todo Незаконченный вариант
+@blueprint.route('/process-update', methods=['POST'])
 @admin_required
-def proces_update(order_id: int) -> Response:
+def process_update() -> Response:
     form = OrderUpdateForm()
-    edited_order = db.session.query(Order).filter_by(id=order_id).first()
+    edited_order = db.session.query(Order).filter_by(id=form.id.data).first()
     if edited_order is not None:
-        edited_order.city = form.city.data,
-        edited_order.street = form.street.data,
-        edited_order.house = form.house.data,
-        edited_order.apartment = form.apartment.data,
+        edited_order.basket_id = edited_order.basket_id,
         edited_order.user_id = form.user_id.data,
-        edited_order.is_active = form.is_active.data,
+        edited_order.is_active = edited_order.is_active,
+        edited_order.comment = form.comment.data,
         db.session.add(edited_order)
         db.session.commit()
     return redirect(url_for('order.show_list'))
@@ -110,10 +124,10 @@ def process_delete(order_id: int) -> Response:
 @admin_required
 def show_list():
     title = 'Список заказов'
-    point_list = Order.query.filter_by(is_active=True).order_by(Order.id.asc()).all()
+    order_list = Order.query.filter_by(is_active=True).order_by(Order.id.asc()).all()
     return render_template(
         'admin/order/list.html',
         page_title=title,
-        point_list=point_list,
+        order_list=order_list,
         menu=config.ADMIN_NAVBAR,
     )

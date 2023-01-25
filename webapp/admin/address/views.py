@@ -55,7 +55,7 @@ def update(address_id: int) -> str:
         user_id=address.user_id,
         is_active=address.is_active,
     )
-    form.user_id.choices = [(user.id, user.name) for user in User.query.order_by('id')]
+    form.user_id.choices = [(user.id, user.username) for user in User.query.order_by('id')]
     if not address:
         abort(404)
     return render_template(
@@ -67,9 +67,9 @@ def update(address_id: int) -> str:
     )
 
 
-@blueprint.route('/process-update')
+@blueprint.route('/process-update', methods=['POST'])
 @admin_required
-def proces_update(address_id: int) -> Response:
+def process_update(address_id: int) -> Response:
     form = AddressUpdateForm()
     edited_address = db.session.query(Address).filter_by(id=address_id).first()
     if edited_address is not None:

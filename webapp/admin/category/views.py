@@ -56,7 +56,8 @@ def update(category_id: int) -> str:
         data=category
     )
 
-@blueprint.route('/process-update')
+
+@blueprint.route('/process-update', methods=['POST'])
 @admin_required
 def process_update(category_id: int) -> Response:
     form = CategoryUpdateForm()

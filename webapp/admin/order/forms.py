@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, SelectField, SelectMultipleField, SubmitField
+from wtforms import IntegerField, SelectField, SelectMultipleField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 
 
@@ -10,6 +10,7 @@ class OrderAddForm(FlaskForm):
         coerce=int,
         render_kw={"class": "form-select", "multiple": True}
     )
+    comment = TextAreaField('Комментарий', render_kw={"class": "form-control"})
     submit = SubmitField('Отправить!', render_kw={"class": "btn btn-primary"})
 
 
@@ -21,4 +22,5 @@ class OrderUpdateForm(FlaskForm):
         coerce=int,
         render_kw={"class": "form-select", "multiple": True}
     )
+    comment = TextAreaField('Комментарий', render_kw={"class": "form-control"})
     submit = SubmitField('Отправить!', render_kw={"class": "btn btn-primary"})

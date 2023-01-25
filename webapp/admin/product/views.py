@@ -10,6 +10,7 @@ from webapp.admin.product.models import Product
 
 blueprint = Blueprint('product', __name__, url_prefix='/admin/product')
 
+
 @blueprint.route('/add')
 @admin_required
 def add() -> str:
@@ -22,6 +23,7 @@ def add() -> str:
         form=form,
         menu=config.ADMIN_NAVBAR,
     )
+
 
 @blueprint.route('/process-add', methods=['POST'])
 @admin_required
@@ -39,6 +41,7 @@ def process_add() -> Response:
     db.session.commit()
     return redirect(url_for('product.show_list'))
 
+
 @blueprint.route('/update/<int:product_id>')
 @admin_required
 def update(product_id: int) -> str:
@@ -46,9 +49,9 @@ def update(product_id: int) -> str:
     product = Product.query.filter(Product.id == product_id).first()
     form = ProductUpdateForm(
         title=product.title,
-        price=form.price,
-        description=form.description,
-        calories=form.calories,
+        price=product.price,
+        description=product.description,
+        calories=product.calories,
         is_active=product.is_active,
     )
     if not product:
@@ -61,7 +64,8 @@ def update(product_id: int) -> str:
         data=product
     )
 
-@blueprint.route('/process-update')
+
+@blueprint.route('/process-update', methods=['POST'])
 @admin_required
 def process_update(product_id: int) -> Response:
     form = ProductUpdateForm()
