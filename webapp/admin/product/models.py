@@ -31,5 +31,4 @@ class ProductCategory(db.Model):
     def __repr__(self) -> str:
         return (
             f"ProductCategory id: {self.id}, product_id: {self.product_id}, category_id: {self.category_id}, "
-            f"extra_data: {self.extra_data}"
         )

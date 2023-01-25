@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 from flask_login import LoginManager
 from flask_migrate import Migrate
 
@@ -64,7 +64,7 @@ def create_app() -> Flask:
                         getattr(form, field).label.text,
                         error
                     ))
-        return render_template('ordering.html')
+        return render_template('ordering.html', form=form)
 
 
     @app.route("/")
@@ -78,11 +78,44 @@ def create_app() -> Flask:
         print(product_list)
         return render_template(
             'index.html',
+            title=title,
             carousel_items=carousel_items,
             reviews=reviews,
             categories=categories,
             product_list=product_list,
         )
+
+    @app.route("/basket")
+    def your_basket():
+        title = 'Ваша корзина'
+        return render_template(
+            'basket.html'
+        )
+    
+    @app.route("/menu")
+    def title_menu():
+        title = 'Меню'
+        carousel_items = MainSliderAction.query.filter_by(is_active=True).order_by(MainSliderAction.position.asc()).all()
+        reviews = Review.query.filter_by(is_active=True).order_by(Review.id.asc()).all()
+        categories = Category.query.filter_by(is_active=True).order_by(Category.id.asc()).all()
+        products = Product.query.filter_by(is_active=True).order_by(Product.id.asc()).all()
+        product_list = get_product_list_with_category(products, categories)
+        return render_template(
+            'menu.html',
+            title=title,
+            carousel_items=carousel_items,
+            reviews=reviews,
+            categories=categories,
+            product_list=product_list,
+        )
+    
+    @app.route('/product_add')
+    def product_add():
+
+        return render_template(
+            'basket.html'
+        )
+
 
     def get_category_dict_by_id(category_id: int, categories: list) -> dict | None:
         for category in categories:

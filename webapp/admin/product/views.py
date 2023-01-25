@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, abort, redirect, url_for
 
 from werkzeug import Response
 
-from webapp import config, Category
+from webapp import config, Category, ProductCategory
 from webapp.admin.decorators import admin_required
 from webapp.admin.product.forms import ProductAddForm, ProductUpdateForm
 from webapp.models import db
@@ -33,10 +33,18 @@ def process_add() -> Response:
         description=form.description.data,
         calories=form.calories.data,
         is_active=True,
-        categories=form.categories.data,
     )
     db.session.add(new_product)
     db.session.commit()
+    print(new_product)
+    for category in form.categories.data:
+        new_product_categoreies = ProductCategory(
+        category_id = category ,
+        product_id = new_product.id
+        )
+    db.session.add(new_product_categoreies)
+    db.session.commit()
+    print(new_product_categoreies)
     return redirect(url_for('product.show_list'))
 
 @blueprint.route('/update/<int:product_id>')
