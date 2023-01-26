@@ -1,3 +1,19 @@
+.count_product_types {
+  margin-left: 5px;
+  width: 23px;
+  height: 20px;
+    display: block;
+    background: white;
+    border: 1px solid white;
+    border-radius: 15px;
+    text-decoration: none;
+  text-align: center;
+  justify-content: center;
+  color: #0c0c0c;
+  font-weight: bold;
+  padding-bottom: 22px;
+}
+
 @media (max-width: 1300px) {}
 
 @media (max-width: 1120px) {}
