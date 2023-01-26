@@ -1,0 +1,18 @@
+{% include "_head.html" %} {% include "_header.html" %}
+<div class="container">
+  Ваша корзина <br />
+  <tr>
+    {% for product_in_basket in basket %}
+    <td>{} product.title }</td>
+    <td>{} product.price }</td>
+  </tr>
+  {% endfor %}
+  <a
+    class="btn btn-primary"
+    href="{{ url_for('process_ordering') }}"
+    role="button"
+    >Оформить заказ</a
+  >
+</div>
+
+{% include "_footer.html" %} {% include "_end_body.html" %}

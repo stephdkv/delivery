@@ -1,44 +1,60 @@
 <!-- header section strats -->
 <header class="header_section">
+  <nav
+    class="navbar navbar-expand-xl custom_nav-container navbar bg-dark"
+    data-bs-theme="dark"
+  >
     <div class="container">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand" href="index.html">
-            <span>
-              Delivery
-            </span>
-            </a>
+      <a class="navbar-brand" href="{{ url_for('index') }}">
+        <span> Delivery </span>
+      </a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class=""> </span>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class=""> </span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('index') }}"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('title_menu') }}">Menu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="basket.html">Book Table</a>
+          </li>
+        </ul>
+        <div class="user_option">
+          <a href="" class="user_link">
+            <i class="fa fa-user" aria-hidden="true"></i>
+          </a>
+          <a class="cart_link" href="{{ url_for('your_basket') }}">
+            {% include "_cart_svg.html" %}
+              <span class="count_product_types">{{ count_product_types | default('0') }}</span>
+          </a>
+          <form class="form-inline">
+            <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
+              <i class="fa fa-search" aria-hidden="true"></i>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav  mx-auto ">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="menu.html">Menu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="book.html">Book Table</a>
-                    </li>
-                </ul>
-                <div class="user_option">
-{#                    <a href="" class="user_link">#}
-{#                        <i class="fa fa-user" aria-hidden="true"></i>#}
-{#                    </a>#}
-                    <a class="cart_link" href="#">
-                        {% include "_cart_svg.html" %}
-                        <span class="count_product_types">{{ count_product_types | default('0') }}</span>
-                    </a>
-                </div>
-            </div>
-        </nav>
+          </form>
+          <a href="" class="order_online"> Order Online </a>
+        </div>
+      </div>
     </div>
+  </nav>
 </header>
 <!-- end header section -->
