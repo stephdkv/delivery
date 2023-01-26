@@ -94,7 +94,6 @@ def create_app() -> Flask:
     @app.route("/menu")
     def title_menu():
         title = 'Меню'
-        carousel_items = MainSliderAction.query.filter_by(is_active=True).order_by(MainSliderAction.position.asc()).all()
         reviews = Review.query.filter_by(is_active=True).order_by(Review.id.asc()).all()
         categories = Category.query.filter_by(is_active=True).order_by(Category.id.asc()).all()
         products = Product.query.filter_by(is_active=True).order_by(Product.id.asc()).all()
@@ -102,7 +101,6 @@ def create_app() -> Flask:
         return render_template(
             'menu.html',
             title=title,
-            carousel_items=carousel_items,
             reviews=reviews,
             categories=categories,
             product_list=product_list,

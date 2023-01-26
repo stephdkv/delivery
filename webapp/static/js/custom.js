@@ -83,7 +83,7 @@ $(document).ready(function() {
             '\t'
         ),
         success: function(data){
-            $('.count_product_types').text(data['count_products_types'])
+            $('.count_product_types').text(data['count_products'])
         }
     });
   });
@@ -105,7 +105,7 @@ $(".add-product-in-basket").click(function (e) {
             '\t'
         ),
         success: function(data){
-            $('.count_product_types').text(data['count_products_types'])
+            $('.count_product_types').text(data['count_products'])
         }
     });
 })

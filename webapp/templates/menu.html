@@ -1,30 +1,5 @@
-{% include "_head.html" %} {% include "_header.html" %}
-{% block slider %}
-<section class="slider_section ">
-    <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            {% for carousel_item in carousel_items %}
-                {% include "components/main_carousel_inner_item.html" %}
-            {% endfor %}
-        </div>
-        <div class="container">
-            <ol class="carousel-indicators">
-                {% for carousel_item in carousel_items %}
-                    <li data-target="#customCarousel1" data-slide-to="{{ carousel_item['position'] }}"
-                            {% if carousel_item['position'] == 0 %}
-                        class="active"
-                            {% endif %}
-                    >
-                    </li>
-                {% endfor %}
-            </ol>
-        </div>
-    </div>
-</section>
-<!-- end slider section -->
-{% endblock slider %}
-</div>
-
+{% include "_head.html" %}
+{% include "_header.html" %}
 <!-- offer section -->
 
 <section class="offer_section layout_padding-bottom">

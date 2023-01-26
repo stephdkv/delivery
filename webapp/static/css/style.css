@@ -138,10 +138,6 @@ a:focus {
      object-position: right top;
 }
 
-.header_section {
-  padding: 15px 0;
-}
-
 .header_section .container-fluid {
   padding-right: 25px;
   padding-left: 25px;
@@ -398,7 +394,6 @@ a:focus {
 
 .offer_section {
   position: relative;
-  padding-top: 45px;
 }
 
 .offer_section .box {
