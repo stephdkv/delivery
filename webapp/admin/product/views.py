@@ -170,3 +170,18 @@ def process_add_from_main():
         db.session.commit()
         count_products_types = 1
     return json.dumps({'count_products_types': count_products_types})
+
+
+@blueprint.route('/get-count-basket-product-types', methods=['POST'])
+def get_count_basket_product_types():
+    post = request.json
+    basket = Basket.query.filter(
+        post['user_id'] == Basket.user_id,
+        Basket.is_ordered == False,
+    ).first()
+    if basket is not None:
+        basket_products = BasketProduct.query.filter_by(basket_id=basket.id).all()
+        count_products_types = len(basket_products)
+    else:
+        count_products_types = 0
+    return json.dumps({'count_products_types': count_products_types})
