@@ -1,18 +1,30 @@
 {% include "_head.html" %} {% include "_header.html" %}
-<div class="container">
-  Ваша корзина <br />
-  <tr>
-    {% for product_in_basket in basket %}
-    <td>{} product.title }</td>
-    <td>{} product.price }</td>
-  </tr>
-  {% endfor %}
-  <a
-    class="btn btn-primary"
-    href="{{ url_for('process_ordering') }}"
-    role="button"
-    >Оформить заказ</a
-  >
-</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Товар</th>
+      <th scope="col">Колличество</th>
+      <th scope="col">Итого</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in basket %}
+    <tr>
+      <th scope="row"></th>
+      <td>{{ product.quantity }}</td>
+      <td>{{ product.final_price }}</td>
+
+      {% endfor %}
+    </tr>
+  </tbody>
+</table>
+<a
+  class="col-3 btn btn-primary"
+  href="{{ url_for('process_ordering') }}"
+  role="button"
+>
+  Оформить заказ
+</a>
 
 {% include "_footer.html" %} {% include "_end_body.html" %}

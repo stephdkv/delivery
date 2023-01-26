@@ -110,7 +110,7 @@
                             <div class="box">
                                 <div>
                                     <div class="img-box">
-                                        <img src="{{ url_for('static', filename='images/') }}{{ product["id"] }}.png"
+                                        <img src="{{ url_for('static', filename='images/') }}{{ product['id'] }}.png"
                                              alt="">
                                     </div>
                                     <div class="detail-box">
@@ -118,7 +118,7 @@
                                         <p>{{ product['description'] }}</p>
                                         <div class="options">
                                             <h6>{{ product['price'] }} ₽</h6>
-                                            <a href="#" class="add-product-in-basket" data-product-id="{{ product["id"] }}">
+                                            <a href="#" class="add-product-in-basket" data-product-id="{{ product['id'] }}">
                                                 {% include "_cart_svg.html" %}
                                             </a>
                                         </div>
