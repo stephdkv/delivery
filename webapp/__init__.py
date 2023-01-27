@@ -209,7 +209,8 @@ def create_app() -> Flask:
         ).first()
         if basket is not None:
             basket_products = BasketProduct.query.filter_by(basket_id=basket.id).all()
-        return basket_products
+            return basket_products
+        return []
 
     return app
 
