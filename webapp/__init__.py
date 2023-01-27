@@ -1,5 +1,5 @@
-from flask import Flask, render_template, url_for
-from flask_login import LoginManager
+from flask import Flask, render_template, url_for, request
+from flask_login import LoginManager, current_user
 from flask_migrate import Migrate
 
 
@@ -10,6 +10,7 @@ from flask import flash
 
 from webapp.admin.category.models import Category
 from webapp.admin.product.models import Product, ProductCategory
+from webapp.admin.order.models import Basket, BasketProduct
 from webapp.user.models import User
 from webapp.models import db, MainSliderAction, Review
 from webapp.user.views import blueprint as user_blueprint
@@ -42,29 +43,36 @@ def create_app() -> Flask:
     @app.route('/ordering', methods=['POST', 'GET'])
     def process_ordering():
         form = OrderingAddForm()
-        if form.validate_on_submit():
-            new_ordering_form = OrderingForm(
-                name=form.name.data,
-                adress=form.adress.data,
-                entrance=form.entrance.data,
-                floor=form.floor.data,
-                apartment=form.apartment.data,
-                phone=form.phone.data,
-                date=form.phone.data,
-                time=form.time.data,
-                comment=form.comment.data
-            )
-            db.session.add(new_ordering_form)
-            db.session.commit()
-            flash('Вы успешно сделали заказ!')
+        if current_user.is_authenticated:
+            if form.validate_on_submit():
+                new_ordering_form = OrderingForm(
+                    name=form.name.data,
+                    adress=form.adress.data,
+                    entrance=form.entrance.data,
+                    floor=form.floor.data,
+                    apartment=form.apartment.data,
+                    phone=form.phone.data,
+                    date=form.phone.data,
+                    time=form.time.data,
+                    comment=form.comment.data
+                )
+                db.session.add(new_ordering_form)
+                db.session.commit()
+                flash('Вы успешно сделали заказ!')
+            else:
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        flash('Ошибка в поле {}: {}'.format(
+                            getattr(form, field).label.text,
+                            error
+                        ))
         else:
-            for field, errors in form.errors.items():
-                for error in errors:
-                    flash('Ошибка в поле {}: {}'.format(
-                        getattr(form, field).label.text,
-                        error
-                    ))
+            pass
+
+        
         return render_template('ordering.html', form=form)
+        
+
 
 
     @app.route("/")
@@ -84,11 +92,54 @@ def create_app() -> Flask:
             product_list=product_list,
         )
 
+    #@app.route("/basket")
+    #def your_basket():
+        title = 'Ваша корзина'
+        basket_products = get_basket_list_with_product()
+        product_ids = [x.product_id for x in basket_products]
+        products = Product.query.filter(Product.id.in_(product_ids)).all()
+        print(products)
+        return render_template(
+            'basket.html',
+            basket_products=basket_products
+        )
+
     @app.route("/basket")
     def your_basket():
         title = 'Ваша корзина'
+        basket_products = get_basket_list_with_product()
+        product_ids = [x.product_id for x in basket_products]
+        products = Product.query.filter(Product.id.in_(product_ids)).all()
+        basket_products_list = []
+        for basket_product in basket_products:
+            needle_product = False
+            for product in products:
+                if product.id == basket_product.product_id :
+                    needle_product = product
+                    #print(needle_product)
+            if not needle_product:
+                product_names = 'Не найден'
+            else:
+                product_names = needle_product.title
+                print(product_names)
+            for product_name in product_names:
+                basket_product_dict = {
+                        'id' : basket_product.id,
+                        'basket_id' : basket_product.basket_id,
+                        'product_id' : basket_product.product_id,
+                        'quantity' : basket_product.quantity,
+                        'base_price' : basket_product.base_price,
+                        'final_price' : basket_product.final_price,
+                        'is_active' : basket_product.is_active,
+                        'product_name': product_name
+                }
+            basket_products_list.append(basket_product_dict)
+            print(basket_products_list)
+
         return render_template(
-            'basket.html'
+            'basket.html',
+            basket_products_list = basket_products_list,
+
         )
     
     @app.route("/menu")
@@ -110,7 +161,6 @@ def create_app() -> Flask:
     
     @app.route('/product_add')
     def product_add():
-
         return render_template(
             'basket.html'
         )
@@ -150,6 +200,9 @@ def create_app() -> Flask:
             product_list.append(product_dict)
         return product_list
 
+    
+
+
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(user_id)
@@ -157,5 +210,16 @@ def create_app() -> Flask:
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(user_id)
+
+
+    def get_basket_list_with_product():
+        basket = Basket.query.filter(
+        current_user.id == Basket.user_id,
+        Basket.is_ordered == False,
+    ).first()
+        if basket is not None:
+            basket_products = BasketProduct.query.filter_by(basket_id=basket.id).all()
+        return basket_products
 
     return app
+

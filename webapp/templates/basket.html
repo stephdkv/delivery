@@ -9,11 +9,18 @@
     </tr>
   </thead>
   <tbody>
-    {% for product in basket %}
+    {% for basket_product_list in basket_products_list%}
+
     <tr>
-      <th scope="row"></th>
-      <td>{{ product.quantity }}</td>
-      <td>{{ product.final_price }}</td>
+      <th scope="row">
+        {% for basket_product in basket_product_list['product_name']%} {{
+        basket_product }}{% endfor %}
+      </th>
+      <td>{{ basket_product_list['quantity'] }}</td>
+      <td>
+        {{ basket_product_list['final_price'] * basket_product_list['quantity']
+        }}
+      </td>
 
       {% endfor %}
     </tr>

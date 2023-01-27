@@ -10,11 +10,11 @@
         <div class="container">
             <ol class="carousel-indicators">
                 {% for carousel_item in carousel_items %}
-                    <li data-target="#customCarousel1" data-slide-to="{{ carousel_item['position'] }}"
-                            {% if carousel_item['position'] == 0 %}
+                    <li data-target="#customCarousel1" data-slide-to="{{ carousel_item['position'] }}">
+                        {% if carousel_item['position'] == 0 %}
                         class="active"
                             {% endif %}
-                    >
+                    
                     </li>
                 {% endfor %}
             </ol>
@@ -118,6 +118,7 @@
                     </div>
                 </div>
             </div>
+            {{product_list}}
         {% endfor %}
     </div>
 </div>

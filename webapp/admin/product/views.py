@@ -126,6 +126,7 @@ def process_add_from_main():
     product = Product.query.filter_by(id=post['product_id']).first()
     if basket is not None:
         basket_products = BasketProduct.query.filter_by(basket_id=basket.id).all()
+        print(basket_products)
         is_product_row_set = False
         for basket_product in basket_products:
             if basket_product.product_id == product.id:
