@@ -69,6 +69,25 @@ $(".client_owl-carousel").owlCarousel({
     }
 });
 
+$(document).ready(function() {
+    $.ajax({
+        url: '/admin/product/get-count-basket-product-types',
+        type: "POST",
+        contentType: "application/json",
+        dataType: 'json',
+        accept: '*/*',
+        data: JSON.stringify({
+                user_id: user_id
+            },
+            null,
+            '\t'
+        ),
+        success: function(data){
+            $('.count_product_types').text(data['count_products'])
+        }
+    });
+  });
+
 $(".add-product-in-basket").click(function (e) {
     e.preventDefault();
     let product_id = $(this).attr('data-product-id')
@@ -86,7 +105,7 @@ $(".add-product-in-basket").click(function (e) {
             '\t'
         ),
         success: function(data){
-            $('.count_product_types').text(data['count_products_types'])
+            $('.count_product_types').text(data['count_products'])
         }
     });
 })

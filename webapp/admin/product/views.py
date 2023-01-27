@@ -146,7 +146,7 @@ def process_add_from_main():
             db.session.add(new_basket_product)
         db.session.commit()
         total = sum([basket_product.final_price * basket_product.quantity for basket_product in basket_products])
-        count_products_types = len(basket_products)
+        count_products = sum([basket_product.quantity for basket_product in basket_products])
         basket.total = total
         db.session.add(basket)
         db.session.commit()
@@ -169,5 +169,20 @@ def process_add_from_main():
         )
         db.session.add(new_basket_product)
         db.session.commit()
-        count_products_types = 1
-    return json.dumps({'count_products_types': count_products_types})
+        count_products = 1
+    return json.dumps({'count_products': count_products})
+
+
+@blueprint.route('/get-count-basket-product-types', methods=['POST'])
+def get_count_basket_product_types():
+    post = request.json
+    basket = Basket.query.filter(
+        post['user_id'] == Basket.user_id,
+        Basket.is_ordered == False,
+    ).first()
+    if basket is not None:
+        basket_products = BasketProduct.query.filter_by(basket_id=basket.id).all()
+        count_products = sum([basket_product.quantity for basket_product in basket_products])
+    else:
+        count_products = 0
+    return json.dumps({'count_products': count_products})
