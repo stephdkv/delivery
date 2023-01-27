@@ -12,10 +12,7 @@
     {% for basket_product_list in basket_products_list%}
 
     <tr>
-      <th scope="row">
-        {% for basket_product in basket_product_list['product_name']%} {{
-        basket_product }}{% endfor %}
-      </th>
+      <th scope="row">{{ basket_product_list['product_name']}}</th>
       <td>{{ basket_product_list['quantity'] }}</td>
       <td>
         {{ basket_product_list['final_price'] * basket_product_list['quantity']
